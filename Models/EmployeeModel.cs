@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DotNetCore_MVC.Models
 {
-    public class Employee
+    public class EmployeeModel
     {
         public int Id { get; set; }
 

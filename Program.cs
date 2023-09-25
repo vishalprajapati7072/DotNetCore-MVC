@@ -1,6 +1,4 @@
-
-using Data;
-using Microsoft.EntityFrameworkCore;
+using DotNetCore_MVC.Models;
 
 namespace DotNetCore_MVC
 {
@@ -10,10 +8,15 @@ namespace DotNetCore_MVC
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<EFCodeFirstDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:EfCodeFirst"]));
+            //builder.Services.AddDbContext<EFCodeFirstDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:EfCodeFirst"]));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            builder.Services.AddSwaggerGen();
+
 
             WebApplication app = builder.Build();
 
@@ -35,6 +38,9 @@ namespace DotNetCore_MVC
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.Run();
         }
