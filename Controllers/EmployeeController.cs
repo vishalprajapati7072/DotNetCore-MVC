@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Data;
-using Data.Entity;
 using DotNetCore_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,18 +6,18 @@ namespace DotNetCore_MVC.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly EFCodeFirstDbContext _eFCodeFirstDbContext;
         private readonly IMapper _mapper;
 
         public EmployeeController(IMapper mapper)
         {
-            _eFCodeFirstDbContext = new EFCodeFirstDbContext();
             _mapper = mapper;
         }
 
         // GET: EmployeeController
         public ActionResult Index()
         {
+            HttpContext.Response.Cookies.Append("user_id", "1");
+
             return View();
         }
 
@@ -42,12 +40,12 @@ namespace DotNetCore_MVC.Controllers
         {
             try
             {
-                Employee employee = _mapper.Map<Employee>(employeeModel);
-                employee.Email = employeeModel.FirstName + employeeModel.LastName;
+                //Employee employee = _mapper.Map<Employee>(employeeModel);
+                //employee.Email = employeeModel.FirstName + employeeModel.LastName;
 
-                _eFCodeFirstDbContext.Employees.Add(employee);
+                //_eFCodeFirstDbContext.Employees.Add(employee);
 
-                _eFCodeFirstDbContext.SaveChanges();
+                //_eFCodeFirstDbContext.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }

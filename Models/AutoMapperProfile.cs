@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Data.Entity;
 
 namespace DotNetCore_MVC.Models
 {
@@ -7,7 +6,7 @@ namespace DotNetCore_MVC.Models
     {
         public AutoMapperProfile()
         {
-            CreateMap<EmployeeModel, Employee>().ForMember(x => x.Email, d => d.MapFrom(y => string.Concat(y.FirstName, y.LastName)));
+            //CreateMap<EmployeeModel, Employee>().ForMember(x => x.Email, d => d.MapFrom(y => string.Concat(y.FirstName, y.LastName)));
         }
     }
 }

@@ -17,7 +17,6 @@ namespace DotNetCore_MVC
 
             builder.Services.AddSwaggerGen();
 
-
             WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -32,6 +31,8 @@ namespace DotNetCore_MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<CommonMiddleware>();
 
             app.UseAuthorization();
 
