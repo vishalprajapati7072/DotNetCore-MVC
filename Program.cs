@@ -1,3 +1,5 @@
+using DotNetCore_MVC.Extensions;
+using DotNetCore_MVC.Middleware;
 using DotNetCore_MVC.Models;
 
 namespace DotNetCore_MVC
@@ -8,10 +10,14 @@ namespace DotNetCore_MVC
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            //builder.Services.AddDbContext<EFCodeFirstDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:EfCodeFirst"]));
+            builder.Services.AddDbContext<EFCodeFirstDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:EfCodeFirst"]));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.ConfigureAuthentication(builder.Configuration);
+
+            builder.Services.ConfigureDependency();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -32,7 +38,7 @@ namespace DotNetCore_MVC
 
             app.UseRouting();
 
-            app.UseMiddleware<CommonMiddleware>();
+            app.UseMiddleware<AuthMiddleware>();
 
             app.UseAuthorization();
 

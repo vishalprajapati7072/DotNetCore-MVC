@@ -1,11 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DotNetCore_MVC.Helper;
+using Microsoft.AspNetCore.Mvc;
+using Service.Contract;
 
 namespace DotNetCore_MVC.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly IEmployee _employee;
+
+        public AuthController(IEmployee employee)
+        {
+            _employee = employee;
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
+
             return View();
         }
 
@@ -13,12 +24,7 @@ namespace DotNetCore_MVC.Controllers
         public IActionResult Login(string userName, string password)
         {
 
-            // API call
-            // var response = // Auth/GetToken?userName=userName&password=password
-
-            // response.token
-
-            HttpContext.Response.Cookies.Append("auth-token", "response.token");
+            string token = TokenManager.GenerateToken(userName, password);
 
             return View();
         }

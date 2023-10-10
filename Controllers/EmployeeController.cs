@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using DotNetCore_MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetCore_MVC.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IMapper _mapper;
@@ -12,6 +14,7 @@ namespace DotNetCore_MVC.Controllers
         {
             _mapper = mapper;
         }
+
 
         // GET: EmployeeController
         public ActionResult Index()
@@ -43,7 +46,7 @@ namespace DotNetCore_MVC.Controllers
                 //Employee employee = _mapper.Map<Employee>(employeeModel);
                 //employee.Email = employeeModel.FirstName + employeeModel.LastName;
 
-                //_eFCodeFirstDbContext.Employees.Add(employee);
+                _eFCodeFirstDbContext.Employees.Add(employee);
 
                 //_eFCodeFirstDbContext.SaveChanges();
 
